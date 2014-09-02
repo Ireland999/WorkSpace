@@ -1,0 +1,1 @@
+{"version":3,"sources":["app/less/app.less"],"names":[],"mappings":"AAEA,KACE","sourcesContent":["@import 'variables.less';\n\nbody {\n  background: @base;\n}\n"]}

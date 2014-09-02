@@ -1,0 +1,26 @@
+{
+  "name": "static-html-builder",
+  "version": "2.0.0",
+  "homepage": "https://github.com/gengen1988/static-html-builder",
+  "authors": [
+    "Gen Liu <gerald_721@hotmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "~1.2.23",
+    "bootstrap": "~3.2.0",
+    "es5-shim": "~4.0.3",
+    "html5shiv": "~3.7.2",
+    "less": "~1.7.4",
+    "jquery": "1",
+    "respond": "~1.4.2"
+  }
+ 
+}
