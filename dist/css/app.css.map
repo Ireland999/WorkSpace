@@ -1,1 +1,0 @@
-{"version":3,"sources":["app/less/app.less"],"names":[],"mappings":"AAGA,KACE,eAAA,CACA,cAGF,KACE","sourcesContent":["@base: black;\n\n\n.top {\n  background: @base;\n  color: lighten(@base, 50%);\n}\n\n.nav {\n  height: 100px;\n}\n"]}

@@ -6,8 +6,4 @@ function ($routeProvider) {
     templateUrl: 'views/user.html'
   });
 
-  $routeProvider.when('/root', {
-    templateUrl: 'views/root.html'
-  });
-
 }]);
