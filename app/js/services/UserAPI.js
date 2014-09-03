@@ -21,6 +21,16 @@ function ($http, $q) {
 				defer.reject(result);
 			});
 			return defer.promise;
+		},
+		load: function(){
+
+			var defer = $q.defer();
+			$http.get('//localhost:8080/api/user').success(function(result){
+
+				defer.resolve(result);
+			});
+
+			return defer.promise;
 		}
 	};
 }]);

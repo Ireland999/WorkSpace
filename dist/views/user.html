@@ -1,0 +1,18 @@
+<div ng-controller="UserController" ng-init="UserVO={username:'主席'};vos=[]">
+	<div>人员管理</div>
+	用户名：<input ng-model="UserVO.username"  type="text"  ><br>
+	用户状态：<select  ng-model="UserVO.flag" >
+		<option value="0">在职</option>
+		<option value="1">离职</option>
+	</select><br>
+	<input ng-click="save(1111)" type="button" value="保存"> 
+
+	<ul>
+		<li ng-repeat="vo in vos">
+			{{vo.username}}
+			<input ng-click="resign(vo)" type="button" value="离职">
+		</li>		
+	</ul>
+	<div>{{UserVO.username}}</div>
+
+</div>
