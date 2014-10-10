@@ -1,1 +1,0 @@
-{"version":3,"sources":["app/less/user.less"],"names":[],"mappings":"AAAA,KACC,OACI,gBAFL,KACC,MAEI,IACG","sourcesContent":[".user {\n\t.list {\n\t    list-style: none;\n\t    li {\n\t       font-weight: bold;\n\t    }\n\t}\n}\n"]}

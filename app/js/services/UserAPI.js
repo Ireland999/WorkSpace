@@ -1,11 +1,12 @@
 angular.module('app.services').factory('UserAPI', [
 	'$http',
 	'$q',
-function ($http, $q) {
+	'config',
+function ($http, $q, config) {
 	return {
 		add: function (UserVO) {
 			var defer = $q.defer();
-			$http.post('//localhost:8080/api/user', UserVO).success(function(result){
+			$http.post(config.host+'/api/user', UserVO).success(function(result){
 				defer.resolve(result);
 			}).error(function(result){
 				defer.reject(result);
@@ -15,7 +16,7 @@ function ($http, $q) {
 
 		resign: function (json) {
 			var defer = $q.defer();
-			$http.post('//localhost:8080/api/user/resign', json).success(function(result){
+			$http.post(config.host+'/api/user/resign', json).success(function(result){
 				defer.resolve(result);
 			}).error(function(result){
 				defer.reject(result);
@@ -25,7 +26,7 @@ function ($http, $q) {
 		load: function(){
 
 			var defer = $q.defer();
-			$http.get('//localhost:8080/api/user').success(function(result){
+			$http.get(config.host+'/api/user').success(function(result){
 
 				defer.resolve(result);
 			});
