@@ -21,3 +21,7 @@ cd static-html-builder
 npm install
 bower install
 ```
+
+跨域
+----
+考虑到 IE 8 的兼容性调整，之后的版本统一去除对跨域的支持。如需在开发过程中访问其他域中的 API Server 时，请在 grunt 加入开发时的代理。在部署生产环境的应用时，使用反向代理将静态文件和 API 置于同一域中。
