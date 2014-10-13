@@ -4,11 +4,11 @@ angular.module('app.services').factory('UserAPI', [
 	'config',
 function ($http, $q, config) {
 	'use strict';
-	
+
 	return {
 		add: function (UserVO) {
 			var defer = $q.defer();
-			$http.post(config.host+'/api/user', UserVO).success(function(result){
+			$http.post(config.userApi, UserVO).success(function(result){
 				defer.resolve(result);
 			}).error(function(result){
 				defer.reject(result);
@@ -18,21 +18,39 @@ function ($http, $q, config) {
 
 		resign: function (json) {
 			var defer = $q.defer();
-			$http.post(config.host+'/api/user/resign', json).success(function(result){
+			$http.post(config.userResign, json).success(function(result){
 				defer.resolve(result);
 			}).error(function(result){
 				defer.reject(result);
 			});
 			return defer.promise;
 		},
-		load: function(){
 
+		load: function (){
 			var defer = $q.defer();
-			$http.get(config.host+'/api/user').success(function(result){
+			$http.get(config.userApi).success(defer.resolve).error(defer.reject);
+			return defer.promise;
+		},
 
-				defer.resolve(result);
-			});
+		uploadLimit: function () {
+			var defer = $q.defer();
+			$http.get(config.uploadPath).success(function (result) {
+				if (!result.status) {
+					defer.reject({
+						message: result.retmsg
+					});
+					return;
+				}
 
+				var type = result.retmsg.filetype;
+				var typeArray = type.split(';');
+
+				defer.resolve({
+					type: typeArray,
+					size: result.retmsg.maxsize,
+					name: result.retmsg.taskname
+				});
+			}).error(defer.reject);
 			return defer.promise;
 		}
 	};

@@ -1,5 +1,9 @@
 var httpProxy = require('http-proxy');
-var appConfig = require('./config');
+var url = require('url');
+var config = require('./config');
+
+var apiServerUrl = url.parse(config.apiServer);
+var uploadServerUrl = url.parse(config.uploadServer);
 
 var proxy = httpProxy.createProxyServer();
 
@@ -20,17 +24,28 @@ module.exports = {
       middleware: function (connect) {
         return [
           connect().use('/bower_components', connect.static('bower_components')),
-          connect.static(appConfig.app),
-          connect.static(appConfig.framework),
-          function (req, res) {
+          connect.static(config.app),
+          connect.static(config.framework),
+          connect().use(apiServerUrl.pathname, function (req, res) {
+            console.log('api proxy');
             proxy.web(req, res, {
-              target: 'http://192.168.0.151:3000'
+              target: config.apiServer
             }, function (e) {
               console.error(e);
               res.statusCode = 500;
               res.end();
             });
-          }
+          }),
+          connect().use(uploadServerUrl.pathname, function (req, res) {
+            console.log('upload proxy');
+            proxy.web(req, res, {
+              target: config.uploadServer
+            }, function (e) {
+              console.error(e);
+              res.statusCode = 500;
+              res.end();
+            });
+          })
         ];
       }
     }

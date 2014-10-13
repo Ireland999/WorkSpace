@@ -2,8 +2,39 @@ angular.module('app.controllers').controller('UserController',[
   '$http',
 	'$scope',
 	'UserAPI',
-function ($http, $scope, UserAPI) {
+  'FileUploader',
+  'config',
+function ($http, $scope, UserAPI, FileUploader, config) {
   'use strict';
+
+  var uploader = new FileUploader({
+    url: config.uploadPath,
+    autoUpload: true,
+    formData: [{
+      test: 'hello'
+    }, {
+      run: 'world'
+    }]
+  });
+
+  var upload = function () {
+    uploader.uploadAll();
+  };
+  
+  uploader.onCompleteItem = function (fileItem, result) {
+    console.log(result);
+    $scope.message = result.retmsg;
+  };
+
+  var getUploadLimit = function () {
+    UserAPI.uploadLimit().then(function (result) {
+      $scope.limitTypes = result.type;
+      $scope.size = result.size;
+      $scope.name = result.name;
+    }, function (result) {
+      alert(result.message);
+    });
+  };
 
 	var save = function () {
 		UserAPI.add($scope.UserVO).then(function (result) {
@@ -48,7 +79,10 @@ function ($http, $scope, UserAPI) {
 
 	};
 
-	$scope.save=save;
-	$scope.resign=resign;
+  $scope.getUploadLimit = getUploadLimit;
+  $scope.upload = upload;
+  $scope.uploader = uploader;
+	$scope.save = save;
+	$scope.resign = resign;
 	load();
 }]);

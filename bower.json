@@ -22,7 +22,8 @@
     "bootstrap": "latest",
     "angular": "latest",
     "angular-route": "latest",
-    "console-polyfill": "latest"
+    "console-polyfill": "latest",
+    "angular-file-upload": "~1.1.1"
   },
   "overrides": {
     "icomoon": {

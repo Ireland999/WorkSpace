@@ -1,12 +1,43 @@
 <div class="user container" ng-controller="UserController" ng-init="UserVO={username:'主席'};vos=[]">
 	<h1><img src="assets/Singularity.jpg">人员管理</h1>
-	用户名：<input class="form-control" ng-model="UserVO.username"  type="text"  ><br>
-	用户状态：<select class="form-control"  ng-model="UserVO.flag" >
-		<option value="0">在职</option>
-		<option value="1">离职</option>
-	</select><br>
-	上传头像：<input class="form-control"   type="file"><br>
-	<input class="btn btn-primary" ng-click="save(1111)" type="button" value="保存"> 
+
+	<div>
+		<label>用户名：</label>
+		<input class="form-control" ng-model="UserVO.username" type="text">
+	</div>
+
+	<div>
+		<label>用户状态：</lable>
+		<select class="form-control" ng-model="UserVO.flag">
+		  <option value="0">在职</option>
+		  <option value="1">离职</option>
+		</select>
+	</div>
+
+  <div>
+		<div>
+			<span>上传文件类型：</span>
+			<span ng-repeat="type in limitTypes" class="tags">{{type}}</span>
+		</div>
+		<div>
+			<span>上传文件大小：</span>
+			<span>{{size}}KB</span>
+		</div>
+		<div>
+			<span>接口名称：</span>
+			<span>{{name}}</span>
+		</div>
+		<button ng-click="getUploadLimit()">查询</button>
+	</div>
+
+	<div>
+		<label>上传头像：</label>
+		<input class="form-control" type="file" nv-file-select uploader="uploader">
+		<button class="form-control" ng-click="upload()">upload</button>
+		<div>{{message}}</div>
+	</div>
+
+	<button class="btn btn-primary" ng-click="save(1111)">保存</button>
 
 	<ul class="list">
 		<li ng-repeat="vo in vos">
@@ -14,8 +45,7 @@
 			{{vo.username}}
 			{{vo.flag | flagFilter}}
 			<input ng-click="resign(vo)" type="button" value="离职" ng-disabled="vo.flag">
-		</li>		
+		</li>
 	</ul>
-	<div>{{UserVO.username}}</div>
 
 </div>
