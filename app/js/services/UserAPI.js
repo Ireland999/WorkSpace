@@ -3,6 +3,8 @@ angular.module('app.services').factory('UserAPI', [
 	'$q',
 	'config',
 function ($http, $q, config) {
+	'use strict';
+	
 	return {
 		add: function (UserVO) {
 			var defer = $q.defer();
