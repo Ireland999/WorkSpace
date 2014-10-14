@@ -2,8 +2,11 @@ angular.module('app.services').factory('UserAPI', [
 	'$http',
 	'$q',
 	'config',
-function ($http, $q, config) {
+	'env',
+function ($http, $q, config, env) {
 	'use strict';
+
+	console.log(env);
 
 	return {
 		add: function (UserVO) {

@@ -8,19 +8,18 @@ function ($http, $scope, UserAPI, FileUploader, config) {
   'use strict';
 
   var uploader = new FileUploader({
-    url: config.uploadPath,
-    autoUpload: true,
-    formData: [{
-      test: 'hello'
-    }, {
-      run: 'world'
-    }]
+    url: config.uploadPath
   });
 
-  var upload = function () {
-    uploader.uploadAll();
+  var upload = function (username) {
+    uploader.getNotUploadedItems().forEach(function (fileitem) {
+      fileitem.formData = [{
+        username: username
+      }];
+      fileitem.upload();
+    });
   };
-  
+
   uploader.onCompleteItem = function (fileItem, result) {
     console.log(result);
     $scope.message = result.retmsg;
@@ -28,6 +27,7 @@ function ($http, $scope, UserAPI, FileUploader, config) {
 
   var getUploadLimit = function () {
     UserAPI.uploadLimit().then(function (result) {
+      console.log(result);
       $scope.limitTypes = result.type;
       $scope.size = result.size;
       $scope.name = result.name;
@@ -61,7 +61,7 @@ function ($http, $scope, UserAPI, FileUploader, config) {
 		},function (result) {
 			//调用服务层接口失败，回滚操作
 			vo.flag = 0;
-			alert(result.message);
+			alert(JSON.stringify(result, null, 2));
 		});
 	};
 

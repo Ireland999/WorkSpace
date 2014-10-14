@@ -41,7 +41,7 @@ module.exports = {
             proxy.web(req, res, {
               target: config.uploadServer
             }, function (e) {
-              console.error(e);
+              console.log(argument);
               res.statusCode = 500;
               res.end();
             });

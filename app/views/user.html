@@ -33,7 +33,7 @@
 	<div>
 		<label>上传头像：</label>
 		<input class="form-control" type="file" nv-file-select uploader="uploader">
-		<button class="form-control" ng-click="upload()">upload</button>
+		<button ng-click="upload(UserVO.username)">上传</button>
 		<div>{{message}}</div>
 	</div>
 
@@ -44,7 +44,7 @@
 			{{vo.userid}}
 			{{vo.username}}
 			{{vo.flag | flagFilter}}
-			<input ng-click="resign(vo)" type="button" value="离职" ng-disabled="vo.flag">
+			<input ng-click="resign(vo)" class="btn btn-danger" type="button" value="离职" ng-disabled="vo.flag">
 		</li>
 	</ul>
 
