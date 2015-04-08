@@ -1,0 +1,58 @@
+/**
+ * Created by Andy_w on 2014/10/23.
+ */
+    <style>
+    .label{
+        line-height: 3;
+        }
+    </style>
+    <admin-header></admin-header>
+
+    <div class="container">
+        <div>
+            <h1>导航编辑</h1>
+            <p>这个工具用于添加和删除导航栏上的按钮.如果需要编辑导航的项目,可以点击相应的列表或者修改按钮。</p>
+            <p>
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation" class="active"><a href="http://localhost:1337/admin/navigations">导航<span class="badge">6</span></a></li>
+                    <span  class="label label-danger">公司首页</span>
+                    <span class="label label-default">公司介绍</span>
+                    <span class="label label-primary">新闻中心</span>
+                    <span class="label label-success">产品与服务</span>
+                    <span class="label label-warning">人才招聘</span>
+                </ul>
+
+
+            </p>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in navs">
+                    <td>
+                        <a ng-href="admin/navigations/{{item.id}}">
+            {{item.name}}
+                        </a>
+                        <span ng-show="item.id>0 && item.id<5" class="label label-default">公司介绍</span>
+                        <span ng-show="item.id>4 && item.id<8" class="label label-primary">新闻中心</span>
+                        <span ng-show="item.id>7 && item.id<14" class="label label-success">产品与服务</span>
+                        <span ng-show="item.id>16 && item.id<23" class="label label-warning">人才招聘</span>
+                    </td>
+                    <td>
+                        <a href="http://221.174.23.2:1337/admin/navigations/{{item.id}}" class="btn btn-info">修改</a>
+                        <button ng-click="remove(item.id)" class="btn btn-danger">删除</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button ng-click="add()" class="form-control btn btn-primary" disabled="disabled">新增</button>
+        <pagination total-items="NavAdmin.totalItems" ng-model="NavAdmin.currentPage" ng-change="NavAdmin.load(NavAdmin.currentPage)"></pagination>
+    </div>
